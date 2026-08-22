@@ -45,14 +45,45 @@ class TSA_Ad_Placement {
 	 */
 	public static function get_ad_for_zone( $zone_id ) {
 
-		$ads = self::get_ads_for_zone( $zone_id );
+        $zone_id = absint( $zone_id );
 
-		if ( empty( $ads ) ) {
-			return null;
-		}
+        if ( ! $zone_id ) {
+                return null;
+        }
 
-		return $ads[0];
-	}
+        $ads = self::get_ads_for_zone( $zone_id );
+
+        if ( empty( $ads ) ) {
+                return null;
+        }
+
+        /*
+         * Get current rotation index for this zone.
+         */
+        $option_name = 'tsa_rotation_index_' . $zone_id;
+
+        $rotation_index = absint(
+                get_option( $option_name, 0 )
+        );
+
+        /*
+         * Select advertisement using rotation index.
+         */
+        $ad_index = $rotation_index % count( $ads );
+
+        $ad = $ads[ $ad_index ];
+
+        /*
+         * Move rotation to the next advertisement.
+         */
+        update_option(
+                $option_name,
+                $rotation_index + 1,
+                false
+        );
+
+        return $ad;
+}
 
 	/**
 	 * Render an advertisement for a zone.
