@@ -27,6 +27,16 @@ require_once TSA_PATH . 'includes/database/class-zones-table.php';
 require_once TSA_PATH . 'includes/database/class-ads-table.php';
 
 /*
+ * Load frontend classes.
+ */
+require_once TSA_PATH . 'includes/frontend/class-ad-placement.php';
+require_once TSA_PATH . 'includes/frontend/class-ad-renderer.php';
+require_once TSA_PATH . 'includes/frontend/class-shortcodes.php';
+require_once TSA_PATH . 'includes/frontend/class-sidebar.php';
+require_once TSA_PATH . 'includes/frontend/class-frontend.php';
+
+TSA_Frontend::init();
+/*
  * Load admin classes.
  */
 if ( is_admin() ) {
