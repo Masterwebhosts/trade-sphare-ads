@@ -1,0 +1,29 @@
+<?php
+/**
+ * Plugin activation handler.
+ *
+ * @package TradeSphareAds
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Handles plugin activation.
+ */
+class TSA_Activator {
+
+	/**
+	 * Run activation tasks.
+	 *
+	 * @return void
+	 */
+	public static function activate() {
+
+		require_once TSA_PATH . 'includes/database/class-zones-table.php';
+		require_once TSA_PATH . 'includes/database/class-database.php';
+
+		TSA_Database::install();
+
+		update_option( 'tsa_version', TSA_VERSION, false );
+	}
+}

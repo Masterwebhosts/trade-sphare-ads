@@ -1,0 +1,61 @@
+.tsa-admin-wrap {
+	max-width: 1200px;
+}
+
+.tsa-dashboard-card {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	padding: 25px;
+	margin-top: 20px;
+}
+
+.tsa-zone-form {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	padding: 25px;
+	margin: 20px 0;
+}
+
+.tsa-zone-form h2 {
+	margin-top: 0;
+}
+
+.tsa-row-subtitle {
+	color: #646970;
+	font-size: 12px;
+	margin-top: 4px;
+}
+
+.tsa-status {
+	display: inline-block;
+	padding: 4px 9px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.tsa-status-active {
+	background: #d1e7dd;
+	color: #0f5132;
+}
+
+.tsa-status-inactive {
+	background: #f8d7da;
+	color: #842029;
+}
+
+.tsa-pricing-type {
+	color: #646970;
+	font-size: 12px;
+	margin-left: 4px;
+}
+
+.tsa-delete-zone {
+	color: #b32d2e;
+}
+
+.tsa-delete-zone:hover {
+	color: #8a2424;
+}
