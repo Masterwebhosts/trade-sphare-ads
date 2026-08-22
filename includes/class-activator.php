@@ -20,9 +20,10 @@ class TSA_Activator {
 	public static function activate() {
 
 		require_once TSA_PATH . 'includes/database/class-zones-table.php';
-		require_once TSA_PATH . 'includes/database/class-database.php';
+        require_once TSA_PATH . 'includes/database/class-ads-table.php';
+        require_once TSA_PATH . 'includes/database/class-database.php';
 
-		TSA_Database::install();
+        TSA_Database::install();
 
 		update_option( 'tsa_version', TSA_VERSION, false );
 	}

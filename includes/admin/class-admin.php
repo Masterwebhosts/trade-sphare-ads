@@ -64,6 +64,15 @@ class TSA_Admin {
 			'tsa-zones',
 			array( $this, 'zones_page' )
 		);
+
+		add_submenu_page(
+        'trade-sphare-ads',
+        __( 'Ads', 'trade-sphare-ads' ),
+        __( 'Ads', 'trade-sphare-ads' ),
+        'manage_options',
+        'tsa-ads',
+        array( $this, 'ads_page' )
+        );
 	}
 
 	/**
@@ -74,12 +83,13 @@ class TSA_Admin {
 	 */
 	public function enqueue_assets( $hook ) {
 
-		if (
-			false === strpos( $hook, 'trade-sphare' ) &&
-			false === strpos( $hook, 'tsa-zones' )
-		) {
-			return;
-		}
+    if (
+        false === strpos( $hook, 'trade-sphare' ) &&
+        false === strpos( $hook, 'tsa-zones' ) &&
+        false === strpos( $hook, 'tsa-ads' )
+    ) {
+        return;
+    }
 
 		wp_enqueue_style(
 			'tsa-admin',
@@ -223,4 +233,86 @@ class TSA_Admin {
 		 */
 		include TSA_PATH . 'templates/admin/zones/list.php';
 	}
+
+	/**
+ * Advertisements page.
+ *
+ * @return void
+ */
+public function ads_page() {
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+                wp_die(
+                        esc_html__(
+                                'You do not have permission to access this page.',
+                                'trade-sphare-ads'
+                        )
+                );
+        }
+
+        /*
+         * Get requested action.
+         */
+        $action = isset( $_GET['action'] )
+                ? sanitize_key( wp_unslash( $_GET['action'] ) )
+                : '';
+
+        /*
+         * Handle create, update and delete requests.
+         */
+        $ads = TSA_Ads::handle_request();
+
+        /*
+         * Add new advertisement.
+         */
+        if ( 'add' === $action && ! isset( $_POST['tsa_ad_action'] ) ) {
+
+                $ad = null;
+
+                include TSA_PATH . 'templates/admin/ads/form.php';
+
+                return;
+        }
+
+        /*
+         * Edit existing advertisement.
+         */
+        if ( 'edit' === $action && ! isset( $_POST['tsa_ad_action'] ) ) {
+
+                $ad_id = isset( $_GET['ad_id'] )
+                        ? absint( $_GET['ad_id'] )
+                        : 0;
+
+                $ad = TSA_Ads_Table::get( $ad_id );
+
+                if ( ! $ad ) {
+
+                        echo '<div class="wrap">';
+
+                        echo '<div class="notice notice-error">';
+                        echo '<p>';
+
+                        echo esc_html__(
+                                'Advertisement not found.',
+                                'trade-sphare-ads'
+                        );
+
+                        echo '</p>';
+                        echo '</div>';
+
+                        echo '</div>';
+
+                        return;
+                }
+
+                include TSA_PATH . 'templates/admin/ads/form.php';
+
+                return;
+        }
+
+        /*
+         * Display advertisements list.
+         */
+        include TSA_PATH . 'templates/admin/ads/list.php';
+    }
 }

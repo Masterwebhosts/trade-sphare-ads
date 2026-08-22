@@ -20,23 +20,24 @@ class TSA_Plugin {
 	public function run() {
 
 		/*
-		 * Load database classes.
-		 */
-		require_once TSA_PATH . 'includes/database/class-database.php';
-		require_once TSA_PATH . 'includes/database/class-zones-table.php';
+ * Load database classes.
+ */
+require_once TSA_PATH . 'includes/database/class-database.php';
+require_once TSA_PATH . 'includes/database/class-zones-table.php';
+require_once TSA_PATH . 'includes/database/class-ads-table.php';
 
-		/*
-		 * Load admin classes.
-		 */
-		if ( is_admin() ) {
+/*
+ * Load admin classes.
+ */
+if ( is_admin() ) {
 
-			require_once TSA_PATH . 'includes/admin/class-zones.php';
-			require_once TSA_PATH . 'includes/admin/class-admin.php';
+        require_once TSA_PATH . 'includes/admin/class-zones.php';
+        require_once TSA_PATH . 'includes/admin/class-ads.php';
+        require_once TSA_PATH . 'includes/admin/class-admin.php';
 
-			$admin = new TSA_Admin();
-			$admin->init();
-		}
-
+        $admin = new TSA_Admin();
+        $admin->init();
+}
 		/*
 		 * Load translations.
 		 */

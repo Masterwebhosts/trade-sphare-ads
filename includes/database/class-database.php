@@ -15,7 +15,7 @@ class TSA_Database {
 	/**
 	 * Current database schema version.
 	 */
-	const DB_VERSION = '1.0.0';
+	const DB_VERSION = '1.1.0';
 
 	/**
 	 * Database schema option name.
@@ -50,6 +50,7 @@ class TSA_Database {
 	 */
 	private static function create_tables() {
 
-		TSA_Zones_Table::create_table();
-	}
+        TSA_Zones_Table::create_table();
+        TSA_Ads_Table::create_table();
+}
 }
