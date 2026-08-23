@@ -15,7 +15,7 @@ class TSA_Database {
         /**
          * Current database schema version.
          */
-        const DB_VERSION = '1.2.0';
+        const DB_VERSION = '1.3.0';
 
         /**
          * Database schema option name.
@@ -67,6 +67,29 @@ class TSA_Database {
                                 '1.2.0',
                                 false
                         );
+
+                        $current_version = '1.2.0';
+                }
+
+                /*
+                 * Upgrade from 1.2.0 to 1.3.0.
+                 *
+                 * Adds advertisement statistics storage.
+                 */
+                if (
+                        version_compare(
+                                $current_version,
+                                '1.3.0',
+                                '<'
+                        )
+                ) {
+                        self::upgrade_to_1_3_0();
+
+                        update_option(
+                                self::DB_VERSION_OPTION,
+                                '1.3.0',
+                                false
+                        );
                 }
         }
 
@@ -79,6 +102,7 @@ class TSA_Database {
 
                 TSA_Zones_Table::create_table();
                 TSA_Ads_Table::create_table();
+                TSA_Stats_Table::create_table();
         }
 
         /**
@@ -114,5 +138,17 @@ class TSA_Database {
                                 ADD KEY automatic_display (automatic_display)"
                         );
                 }
+        }
+
+        /**
+         * Upgrade database schema to 1.3.0.
+         *
+         * Adds advertisement statistics storage.
+         *
+         * @return void
+         */
+        private static function upgrade_to_1_3_0() {
+
+                TSA_Stats_Table::create_table();
         }
 }
