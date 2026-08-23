@@ -12,91 +12,98 @@ defined( 'ABSPATH' ) || exit;
  */
 class TSA_Plugin {
 
-	/**
-	 * Run the plugin.
-	 *
-	 * @return void
-	 */
-	public function run() {
+        /**
+         * Run the plugin.
+         *
+         * @return void
+         */
+        public function run() {
 
-		/*
- * Load database classes.
- */
-require_once TSA_PATH . 'includes/database/class-database.php';
-require_once TSA_PATH . 'includes/database/class-zones-table.php';
-require_once TSA_PATH . 'includes/database/class-ads-table.php';
+                /*
+                 * Load database classes.
+                 */
+                require_once TSA_PATH . 'includes/database/class-database.php';
+                require_once TSA_PATH . 'includes/database/class-zones-table.php';
+                require_once TSA_PATH . 'includes/database/class-ads-table.php';
 
-/*
- * Load frontend classes.
- */
-require_once TSA_PATH . 'includes/frontend/class-ad-placement.php';
-require_once TSA_PATH . 'includes/frontend/class-ad-renderer.php';
-require_once TSA_PATH . 'includes/frontend/class-shortcodes.php';
-require_once TSA_PATH . 'includes/frontend/class-sidebar.php';
-require_once TSA_PATH . 'includes/frontend/class-frontend.php';
+                /*
+                 * Load frontend classes.
+                 */
+                require_once TSA_PATH . 'includes/frontend/class-ad-placement.php';
+                require_once TSA_PATH . 'includes/frontend/class-ad-renderer.php';
+                require_once TSA_PATH . 'includes/frontend/class-shortcodes.php';
+                require_once TSA_PATH . 'includes/frontend/class-sidebar.php';
+                require_once TSA_PATH . 'includes/frontend/class-frontend.php';
+                require_once TSA_PATH . 'includes/frontend/class-article.php';
 
-TSA_Frontend::init();
-/*
- * Load admin classes.
- */
-if ( is_admin() ) {
+                /*
+                 * Initialize frontend.
+                 */
+                TSA_Frontend::init();
+                TSA_Article::init();
 
-        require_once TSA_PATH . 'includes/admin/class-zones.php';
-        require_once TSA_PATH . 'includes/admin/class-ads.php';
-        require_once TSA_PATH . 'includes/admin/class-admin.php';
+                /*
+                 * Load admin classes.
+                 */
+                if ( is_admin() ) {
 
-        $admin = new TSA_Admin();
-        $admin->init();
-}
-		/*
-		 * Load translations.
-		 */
-		add_action(
-			'plugins_loaded',
-			array( $this, 'load_textdomain' )
-		);
+                        require_once TSA_PATH . 'includes/admin/class-zones.php';
+                        require_once TSA_PATH . 'includes/admin/class-ads.php';
+                        require_once TSA_PATH . 'includes/admin/class-admin.php';
 
-		/*
-		 * Admin development notice.
-		 */
-		add_action(
-			'admin_notices',
-			array( $this, 'admin_notice' )
-		);
-	}
+                        $admin = new TSA_Admin();
+                        $admin->init();
+                }
 
-	/**
-	 * Load plugin translations.
-	 *
-	 * @return void
-	 */
-	public function load_textdomain() {
+                /*
+                 * Load translations.
+                 */
+                add_action(
+                        'plugins_loaded',
+                        array( $this, 'load_textdomain' )
+                );
 
-		load_plugin_textdomain(
-			'trade-sphare-ads',
-			false,
-			dirname( TSA_BASENAME ) . '/languages'
-		);
-	}
+                /*
+                 * Admin development notice.
+                 */
+                add_action(
+                        'admin_notices',
+                        array( $this, 'admin_notice' )
+                );
+        }
 
-	/**
-	 * Display development notice.
-	 *
-	 * @return void
-	 */
-	public function admin_notice() {
+        /**
+         * Load plugin translations.
+         *
+         * @return void
+         */
+        public function load_textdomain() {
 
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
+                load_plugin_textdomain(
+                        'trade-sphare-ads',
+                        false,
+                        dirname( TSA_BASENAME ) . '/languages'
+                );
+        }
 
-		echo '<div class="notice notice-success is-dismissible">';
-		echo '<p>';
-		echo esc_html__(
-			'Trade Sphare Ads is active and ready for development.',
-			'trade-sphare-ads'
-		);
-		echo '</p>';
-		echo '</div>';
-	}
+        /**
+         * Display development notice.
+         *
+         * @return void
+         */
+        public function admin_notice() {
+
+                if ( ! current_user_can( 'manage_options' ) ) {
+                        return;
+                }
+
+                echo '<div class="notice notice-success is-dismissible">';
+                echo '<p>';
+                echo esc_html__(
+                        'Trade Sphare Ads is active and ready for development.',
+                        'trade-sphare-ads'
+                );
+                echo '</p>';
+                echo '</div>';
+        }
 }

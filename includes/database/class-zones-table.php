@@ -52,6 +52,7 @@ class TSA_Zones_Table {
 			price decimal(12,2) NOT NULL DEFAULT 0.00,
 			currency varchar(10) NOT NULL DEFAULT 'USD',
 			status varchar(20) NOT NULL DEFAULT 'active',
+			automatic_display tinyint(1) unsigned NOT NULL DEFAULT 1,
 			sort_order int(11) NOT NULL DEFAULT 0,
 			created_at datetime NOT NULL,
 			updated_at datetime NOT NULL,
@@ -59,7 +60,8 @@ class TSA_Zones_Table {
 			UNIQUE KEY slug (slug),
 			KEY location (location),
 			KEY status (status),
-			KEY pricing_type (pricing_type)
+			KEY pricing_type (pricing_type),
+			KEY automatic_display (automatic_display)
 		) {$charset_collate};";
 
 		dbDelta( $sql );
@@ -267,6 +269,12 @@ class TSA_Zones_Table {
 			? sanitize_key( $data['status'] )
 			: 'active';
 
+		$automatic_display = isset( $data['automatic_display'] )
+			? absint( $data['automatic_display'] )
+			: 1;
+
+		$automatic_display = $automatic_display ? 1 : 0;
+
 		$sort_order = isset( $data['sort_order'] )
 			? intval( $data['sort_order'] )
 			: 0;
@@ -274,18 +282,19 @@ class TSA_Zones_Table {
 		$inserted = $wpdb->insert(
 			$table_name,
 			array(
-				'name'         => $name,
-				'slug'         => $slug,
-				'location'     => $location,
-				'width'        => $width,
-				'height'       => $height,
-				'pricing_type' => $pricing_type,
-				'price'        => $price,
-				'currency'     => $currency,
-				'status'       => $status,
-				'sort_order'   => $sort_order,
-				'created_at'   => $now,
-				'updated_at'   => $now,
+				'name'              => $name,
+				'slug'              => $slug,
+				'location'          => $location,
+				'width'             => $width,
+				'height'            => $height,
+				'pricing_type'      => $pricing_type,
+				'price'             => $price,
+				'currency'          => $currency,
+				'status'            => $status,
+				'automatic_display' => $automatic_display,
+				'sort_order'        => $sort_order,
+				'created_at'        => $now,
+				'updated_at'        => $now,
 			),
 			array(
 				'%s',
@@ -297,6 +306,7 @@ class TSA_Zones_Table {
 				'%.2f',
 				'%s',
 				'%s',
+				'%d',
 				'%d',
 				'%s',
 				'%s',
@@ -408,6 +418,14 @@ class TSA_Zones_Table {
 		if ( isset( $data['status'] ) ) {
 			$update['status'] = sanitize_key( $data['status'] );
 			$format[]         = '%s';
+		}
+
+		if ( isset( $data['automatic_display'] ) ) {
+			$update['automatic_display'] = absint(
+				$data['automatic_display']
+			) ? 1 : 0;
+
+			$format[] = '%d';
 		}
 
 		if ( isset( $data['sort_order'] ) ) {

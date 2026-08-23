@@ -153,6 +153,10 @@ class TSA_Zones {
 				? sanitize_key( wp_unslash( $_POST['status'] ) )
 				: 'active',
 
+				'automatic_display' => isset( $_POST['automatic_display'] )
+                ? absint( $_POST['automatic_display'] )
+                : 1,
+
 			'sort_order'   => isset( $_POST['sort_order'] )
 				? intval( $_POST['sort_order'] )
 				: 0,

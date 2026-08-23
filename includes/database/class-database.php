@@ -12,45 +12,107 @@ defined( 'ABSPATH' ) || exit;
  */
 class TSA_Database {
 
-	/**
-	 * Current database schema version.
-	 */
-	const DB_VERSION = '1.1.0';
+        /**
+         * Current database schema version.
+         */
+        const DB_VERSION = '1.2.0';
 
-	/**
-	 * Database schema option name.
-	 */
-	const DB_VERSION_OPTION = 'tsa_db_version';
+        /**
+         * Database schema option name.
+         */
+        const DB_VERSION_OPTION = 'tsa_db_version';
 
-	/**
-	 * Run database installation or upgrade.
-	 *
-	 * @return void
-	 */
-	public static function install() {
-		$current_version = get_option( self::DB_VERSION_OPTION, '0.0.0' );
+        /**
+         * Run database installation or upgrade.
+         *
+         * @return void
+         */
+        public static function install() {
 
-		if ( version_compare( $current_version, self::DB_VERSION, '>=' ) ) {
-			return;
-		}
+                $current_version = get_option(
+                        self::DB_VERSION_OPTION,
+                        '0.0.0'
+                );
 
-		self::create_tables();
+                /*
+                 * Fresh installation.
+                 */
+                if ( '0.0.0' === $current_version ) {
 
-		update_option(
-			self::DB_VERSION_OPTION,
-			self::DB_VERSION,
-			false
-		);
-	}
+                        self::create_tables();
 
-	/**
-	 * Create all plugin database tables.
-	 *
-	 * @return void
-	 */
-	private static function create_tables() {
+                        update_option(
+                                self::DB_VERSION_OPTION,
+                                self::DB_VERSION,
+                                false
+                        );
 
-        TSA_Zones_Table::create_table();
-        TSA_Ads_Table::create_table();
-}
+                        return;
+                }
+
+                /*
+                 * Upgrade from 1.1.0 to 1.2.0.
+                 */
+                if (
+                        version_compare(
+                                $current_version,
+                                '1.2.0',
+                                '<'
+                        )
+                ) {
+                        self::upgrade_to_1_2_0();
+
+                        update_option(
+                                self::DB_VERSION_OPTION,
+                                '1.2.0',
+                                false
+                        );
+                }
+        }
+
+        /**
+         * Create all plugin database tables.
+         *
+         * @return void
+         */
+        private static function create_tables() {
+
+                TSA_Zones_Table::create_table();
+                TSA_Ads_Table::create_table();
+        }
+
+        /**
+         * Upgrade database schema to 1.2.0.
+         *
+         * Adds automatic advertisement display support.
+         *
+         * @return void
+         */
+        private static function upgrade_to_1_2_0() {
+
+                global $wpdb;
+
+                $table_name = TSA_Zones_Table::table_name();
+
+                $column_exists = $wpdb->get_var(
+                        $wpdb->prepare(
+                                "SHOW COLUMNS FROM {$table_name} LIKE %s",
+                                'automatic_display'
+                        )
+                );
+
+                if ( ! $column_exists ) {
+
+                        $wpdb->query(
+                                "ALTER TABLE {$table_name}
+                                ADD COLUMN automatic_display tinyint(1) unsigned NOT NULL DEFAULT 1
+                                AFTER status"
+                        );
+
+                        $wpdb->query(
+                                "ALTER TABLE {$table_name}
+                                ADD KEY automatic_display (automatic_display)"
+                        );
+                }
+        }
 }

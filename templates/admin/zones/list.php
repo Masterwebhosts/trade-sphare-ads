@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$data = $zones;
+$data = isset( $zones ) && is_array( $zones ) ? $zones : array();
 
 $zone_list = isset( $data['zones'] ) ? $data['zones'] : array();
 $message   = isset( $data['message'] ) ? $data['message'] : '';
@@ -146,7 +146,7 @@ $error     = isset( $data['error'] ) ? $data['error'] : '';
 							</a>
 
 							|
-							
+
 							<a
 								href="<?php echo esc_url( $delete_url ); ?>"
 								style="color:#b32d2e;"

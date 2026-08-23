@@ -12,19 +12,36 @@ defined( 'ABSPATH' ) || exit;
  */
 class TSA_Activator {
 
-	/**
-	 * Run activation tasks.
-	 *
-	 * @return void
-	 */
-	public static function activate() {
+        /**
+         * Run activation tasks.
+         *
+         * @return void
+         */
+        public static function activate() {
 
-		require_once TSA_PATH . 'includes/database/class-zones-table.php';
-        require_once TSA_PATH . 'includes/database/class-ads-table.php';
-        require_once TSA_PATH . 'includes/database/class-database.php';
+                /*
+                 * Load database table classes.
+                 */
+                require_once TSA_PATH . 'includes/database/class-zones-table.php';
+                require_once TSA_PATH . 'includes/database/class-ads-table.php';
 
-        TSA_Database::install();
+                /*
+                 * Load database manager.
+                 */
+                require_once TSA_PATH . 'includes/database/class-database.php';
 
-		update_option( 'tsa_version', TSA_VERSION, false );
-	}
+                /*
+                 * Install or upgrade database tables.
+                 */
+                TSA_Database::install();
+
+                /*
+                 * Store plugin version.
+                 */
+                update_option(
+                        'tsa_version',
+                        TSA_VERSION,
+                        false
+                );
+        }
 }

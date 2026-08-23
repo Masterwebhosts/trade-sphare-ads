@@ -69,7 +69,6 @@ $zones = TSA_Zones_Table::get_all(
 		<table class="form-table">
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-zone">
 						<?php esc_html_e( 'Ad Zone', 'trade-sphare-ads' ); ?>
@@ -77,13 +76,11 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<select
 						id="tsa-ad-zone"
 						name="zone_id"
 						required
 					>
-
 						<option value="">
 							<?php esc_html_e( 'Select a zone', 'trade-sphare-ads' ); ?>
 						</option>
@@ -106,13 +103,10 @@ $zones = TSA_Zones_Table::get_all(
 						<?php endforeach; ?>
 
 					</select>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-name">
 						<?php esc_html_e( 'Ad Name', 'trade-sphare-ads' ); ?>
@@ -120,7 +114,6 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<input
 						type="text"
 						id="tsa-ad-name"
@@ -133,13 +126,10 @@ $zones = TSA_Zones_Table::get_all(
 					<p class="description">
 						<?php esc_html_e( 'Internal name used to identify the advertisement.', 'trade-sphare-ads' ); ?>
 					</p>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-title">
 						<?php esc_html_e( 'Title', 'trade-sphare-ads' ); ?>
@@ -147,7 +137,6 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<input
 						type="text"
 						id="tsa-ad-title"
@@ -155,21 +144,17 @@ $zones = TSA_Zones_Table::get_all(
 						value="<?php echo esc_attr( $title ); ?>"
 						class="regular-text"
 					>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
-					<label for="tsa-ad-content">
+					<label for="tsa_ad_content">
 						<?php esc_html_e( 'Content', 'trade-sphare-ads' ); ?>
 					</label>
 				</th>
 
 				<td>
-
 					<?php
 					wp_editor(
 						$content,
@@ -181,13 +166,10 @@ $zones = TSA_Zones_Table::get_all(
 						)
 					);
 					?>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-image">
 						<?php esc_html_e( 'Image URL', 'trade-sphare-ads' ); ?>
@@ -195,7 +177,6 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<input
 						type="url"
 						id="tsa-ad-image"
@@ -207,13 +188,10 @@ $zones = TSA_Zones_Table::get_all(
 					<p class="description">
 						<?php esc_html_e( 'Optional image URL for the advertisement.', 'trade-sphare-ads' ); ?>
 					</p>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-target">
 						<?php esc_html_e( 'Target URL', 'trade-sphare-ads' ); ?>
@@ -221,7 +199,6 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<input
 						type="url"
 						id="tsa-ad-target"
@@ -233,13 +210,10 @@ $zones = TSA_Zones_Table::get_all(
 					<p class="description">
 						<?php esc_html_e( 'URL opened when the advertisement is clicked.', 'trade-sphare-ads' ); ?>
 					</p>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-status">
 						<?php esc_html_e( 'Status', 'trade-sphare-ads' ); ?>
@@ -247,12 +221,10 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<select
 						id="tsa-ad-status"
 						name="status"
 					>
-
 						<option
 							value="active"
 							<?php selected( $status, 'active' ); ?>
@@ -266,15 +238,11 @@ $zones = TSA_Zones_Table::get_all(
 						>
 							<?php esc_html_e( 'Inactive', 'trade-sphare-ads' ); ?>
 						</option>
-
 					</select>
-
 				</td>
-
 			</tr>
 
 			<tr>
-
 				<th>
 					<label for="tsa-ad-sort">
 						<?php esc_html_e( 'Sort Order', 'trade-sphare-ads' ); ?>
@@ -282,7 +250,6 @@ $zones = TSA_Zones_Table::get_all(
 				</th>
 
 				<td>
-
 					<input
 						type="number"
 						id="tsa-ad-sort"
@@ -294,9 +261,7 @@ $zones = TSA_Zones_Table::get_all(
 					<p class="description">
 						<?php esc_html_e( 'Lower numbers are displayed first.', 'trade-sphare-ads' ); ?>
 					</p>
-
 				</td>
-
 			</tr>
 
 		</table>
