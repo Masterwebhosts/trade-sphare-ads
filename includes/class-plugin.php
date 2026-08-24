@@ -56,10 +56,13 @@ class TSA_Plugin {
 
                         require_once TSA_PATH . 'includes/admin/class-zones.php';
                         require_once TSA_PATH . 'includes/admin/class-ads.php';
+                        require_once TSA_PATH . 'includes/admin/class-statistics.php';
                         require_once TSA_PATH . 'includes/admin/class-admin.php';
 
                         $admin = new TSA_Admin();
                         $admin->init();
+                        $statistics = new TSA_Statistics();
+	                $statistics->init();
                 }
 
                 /*
