@@ -27,6 +27,11 @@ class TSA_Plugin {
                 require_once TSA_PATH . 'includes/database/class-ads-table.php';
                 require_once TSA_PATH . 'includes/database/class-stats-table.php';
 
+                require_once TSA_PATH . 'includes/tracking/class-tracking.php';
+                require_once TSA_PATH . 'includes/tracking/class-impressions.php';
+                require_once TSA_PATH . 'includes/tracking/class-clicks.php';
+                require_once TSA_PATH . 'includes/tracking/class-click-handler.php';
+
                 /*
                  * Load frontend classes.
                  */
@@ -42,6 +47,7 @@ class TSA_Plugin {
                  */
                 TSA_Frontend::init();
                 TSA_Article::init();
+                TSA_Click_Handler::init();
 
                 /*
                  * Load admin classes.

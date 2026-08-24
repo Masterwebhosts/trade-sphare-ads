@@ -72,7 +72,7 @@ class TSA_Database {
                 }
 
                 /*
-                 * Upgrade from 1.2.0 to 1.3.0.
+                 * Upgrade to 1.3.0.
                  *
                  * Adds advertisement statistics storage.
                  */
@@ -91,6 +91,36 @@ class TSA_Database {
                                 false
                         );
                 }
+
+                /*
+                 * Safety check.
+                 *
+                 * The database version may already be 1.3.0 while the
+                 * statistics table is missing. This can happen if table
+                 * creation failed during a previous installation or upgrade.
+                 */
+                if ( ! self::stats_table_exists() ) {
+                        TSA_Stats_Table::create_table();
+                }
+        }
+
+        /**
+         * Check whether the statistics table exists.
+         *
+         * @return bool
+         */
+        private static function stats_table_exists() {
+
+                global $wpdb;
+
+                $table_name = TSA_Stats_Table::table_name();
+
+                return $wpdb->get_var(
+                        $wpdb->prepare(
+                                'SHOW TABLES LIKE %s',
+                                $table_name
+                        )
+                ) === $table_name;
         }
 
         /**
