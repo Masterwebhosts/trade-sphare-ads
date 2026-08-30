@@ -15,7 +15,7 @@ class TSA_Database {
         /**
          * Current database schema version.
          */
-        const DB_VERSION = '1.2.0';
+        const DB_VERSION = '1.3.0';
 
         /**
          * Database schema option name.
@@ -67,7 +67,60 @@ class TSA_Database {
                                 '1.2.0',
                                 false
                         );
+
+                        $current_version = '1.2.0';
                 }
+
+                /*
+                 * Upgrade to 1.3.0.
+                 *
+                 * Adds advertisement statistics storage.
+                 */
+                if (
+                        version_compare(
+                                $current_version,
+                                '1.3.0',
+                                '<'
+                        )
+                ) {
+                        self::upgrade_to_1_3_0();
+
+                        update_option(
+                                self::DB_VERSION_OPTION,
+                                '1.3.0',
+                                false
+                        );
+                }
+
+                /*
+                 * Safety check.
+                 *
+                 * The database version may already be 1.3.0 while the
+                 * statistics table is missing. This can happen if table
+                 * creation failed during a previous installation or upgrade.
+                 */
+                if ( ! self::stats_table_exists() ) {
+                        TSA_Stats_Table::create_table();
+                }
+        }
+
+        /**
+         * Check whether the statistics table exists.
+         *
+         * @return bool
+         */
+        private static function stats_table_exists() {
+
+                global $wpdb;
+
+                $table_name = TSA_Stats_Table::table_name();
+
+                return $wpdb->get_var(
+                        $wpdb->prepare(
+                                'SHOW TABLES LIKE %s',
+                                $table_name
+                        )
+                ) === $table_name;
         }
 
         /**
@@ -79,6 +132,7 @@ class TSA_Database {
 
                 TSA_Zones_Table::create_table();
                 TSA_Ads_Table::create_table();
+                TSA_Stats_Table::create_table();
         }
 
         /**
@@ -114,5 +168,17 @@ class TSA_Database {
                                 ADD KEY automatic_display (automatic_display)"
                         );
                 }
+        }
+
+        /**
+         * Upgrade database schema to 1.3.0.
+         *
+         * Adds advertisement statistics storage.
+         *
+         * @return void
+         */
+        private static function upgrade_to_1_3_0() {
+
+                TSA_Stats_Table::create_table();
         }
 }

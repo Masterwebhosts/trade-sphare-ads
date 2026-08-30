@@ -15,14 +15,17 @@ class TSA_Ad_Renderer {
 	/**
 	 * Render an advertisement.
 	 *
-	 * @param object|null $ad Advertisement object.
+	 * @param object|null $ad      Advertisement object.
+	 * @param int         $zone_id Advertisement zone ID.
 	 * @return string
 	 */
-	public static function render( $ad ) {
+	public static function render( $ad, $zone_id = 0 ) {
 
 		if ( ! $ad || empty( $ad->id ) ) {
 			return '';
 		}
+
+		$zone_id = absint( $zone_id );
 
 		ob_start();
 

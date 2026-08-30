@@ -1,0 +1,701 @@
+/**
+
+* Trade Sphare Agency Partner Form.
+*
+* @package TradeSphareAds
+  */
+
+/* =========================================================
+Base
+========================================================= */
+
+.tsa-agency-section {
+width: 100%;
+margin: 0;
+padding: 70px 20px;
+background: #f4f7fb;
+direction: rtl;
+text-align: right;
+box-sizing: border-box;
+}
+
+.tsa-agency-section *,
+.tsa-agency-section *::before,
+.tsa-agency-section *::after {
+box-sizing: border-box;
+}
+
+.tsa-agency-container {
+width: 100%;
+max-width: 920px;
+margin: 0 auto;
+}
+
+/* =========================================================
+Header
+========================================================= */
+
+.tsa-agency-header {
+max-width: 780px;
+margin: 0 auto 42px;
+text-align: center;
+}
+
+.tsa-agency-badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 16px;
+padding: 7px 16px;
+border: 1px solid #c7d2fe;
+border-radius: 999px;
+background: #eef2ff;
+color: #4f46e5;
+font-size: 13px;
+font-weight: 700;
+line-height: 1.4;
+white-space: nowrap;
+}
+
+.tsa-agency-header h2 {
+display: block;
+width: 100%;
+margin: 0 0 16px;
+color: #172554;
+font-size: clamp(30px, 4vw, 46px);
+font-weight: 800;
+line-height: 1.3;
+white-space: normal;
+word-break: normal;
+overflow-wrap: normal;
+}
+
+.tsa-agency-header p {
+display: block;
+width: 100%;
+margin: 0;
+color: #64748b;
+font-size: 17px;
+font-weight: 400;
+line-height: 1.9;
+white-space: normal;
+word-break: normal;
+overflow-wrap: break-word;
+}
+
+/* =========================================================
+Main Layout
+Instructions Above Form
+========================================================= */
+
+.tsa-agency-layout {
+display: flex;
+flex-direction: column;
+width: 100%;
+gap: 26px;
+margin: 0 auto;
+align-items: stretch;
+}
+
+/* =========================================================
+Cards
+========================================================= */
+
+.tsa-agency-info,
+.tsa-agency-form-wrapper {
+width: 100%;
+border: 1px solid #dbe4f0;
+border-radius: 22px;
+background: #ffffff;
+}
+
+.tsa-agency-info {
+padding: 34px;
+box-shadow: 0 8px 28px rgba(30, 64, 175, 0.06);
+}
+
+.tsa-agency-form-wrapper {
+padding: 34px;
+box-shadow: 0 14px 38px rgba(30, 64, 175, 0.09);
+}
+
+.tsa-agency-info h3,
+.tsa-agency-form-wrapper h3 {
+display: block;
+width: 100%;
+margin: 0 0 12px;
+color: #172554;
+font-size: 23px;
+font-weight: 800;
+line-height: 1.5;
+white-space: normal;
+word-break: normal;
+overflow-wrap: normal;
+}
+
+/* =========================================================
+Commission
+========================================================= */
+
+.tsa-agency-commission {
+display: flex;
+align-items: center;
+gap: 16px;
+margin: 0 0 30px;
+padding: 20px 22px;
+border: 1px solid #c7d2fe;
+border-radius: 17px;
+background: linear-gradient(
+135deg,
+#eef2ff 0%,
+#f5f3ff 100%
+);
+}
+
+.tsa-agency-commission strong {
+display: block;
+flex: 0 0 auto;
+margin: 0;
+color: #4f46e5;
+font-size: 36px;
+font-weight: 800;
+line-height: 1;
+white-space: nowrap;
+}
+
+.tsa-agency-commission div {
+display: block;
+margin: 0;
+color: #475569;
+font-size: 15px;
+font-weight: 700;
+line-height: 1.6;
+white-space: normal;
+}
+
+/* =========================================================
+Steps
+========================================================= */
+
+.tsa-agency-steps {
+display: flex;
+flex-direction: column;
+gap: 22px;
+margin: 22px 0 0;
+padding: 0;
+list-style: none;
+counter-reset: agency-step;
+}
+
+.tsa-agency-steps li {
+position: relative;
+display: grid;
+grid-template-columns: 44px minmax(0, 1fr);
+gap: 14px;
+align-items: start;
+width: 100%;
+margin: 0;
+padding: 0;
+counter-increment: agency-step;
+}
+
+.tsa-agency-steps li::before {
+content: counter(agency-step);
+display: flex;
+align-items: center;
+justify-content: center;
+width: 44px;
+height: 44px;
+border: 1px solid #c7d2fe;
+border-radius: 50%;
+background: #eef2ff;
+color: #4f46e5;
+font-size: 14px;
+font-weight: 800;
+line-height: 1;
+}
+
+.tsa-agency-step-content {
+min-width: 0;
+width: 100%;
+}
+
+.tsa-agency-step-content strong {
+display: block;
+width: 100%;
+margin: 0 0 5px;
+color: #1e293b;
+font-size: 16px;
+font-weight: 800;
+line-height: 1.6;
+white-space: normal;
+word-break: normal;
+overflow-wrap: normal;
+}
+
+.tsa-agency-step-content p {
+display: block;
+width: 100%;
+margin: 0;
+color: #64748b;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.85;
+white-space: normal;
+word-break: normal;
+overflow-wrap: break-word;
+}
+
+/* =========================================================
+Commission Note
+========================================================= */
+
+.tsa-agency-note {
+margin-top: 30px;
+padding: 20px 22px;
+border: 1px solid #bfdbfe;
+border-right: 4px solid #2563eb;
+border-radius: 14px;
+background: #eff6ff;
+}
+
+.tsa-agency-note strong {
+display: block;
+margin: 0 0 7px;
+color: #1e3a8a;
+font-size: 15px;
+font-weight: 800;
+line-height: 1.6;
+}
+
+.tsa-agency-note p {
+display: block;
+margin: 0;
+color: #475569;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.85;
+white-space: normal;
+word-break: normal;
+overflow-wrap: break-word;
+}
+
+/* =========================================================
+Form Intro
+========================================================= */
+
+.tsa-agency-form-intro {
+display: block;
+width: 100%;
+margin: 0 0 27px;
+color: #64748b;
+font-size: 15px;
+font-weight: 400;
+line-height: 1.85;
+white-space: normal;
+word-break: normal;
+overflow-wrap: break-word;
+}
+
+/* =========================================================
+Form
+========================================================= */
+
+.tsa-agency-form {
+display: flex;
+flex-direction: column;
+width: 100%;
+gap: 19px;
+}
+
+.tsa-agency-field {
+display: block;
+width: 100%;
+margin: 0;
+padding: 0;
+}
+
+.tsa-agency-field label {
+display: block;
+width: 100%;
+margin: 0 0 8px;
+color: #334155;
+font-size: 14px;
+font-weight: 700;
+line-height: 1.6;
+white-space: normal;
+word-break: normal;
+overflow-wrap: normal;
+}
+
+.tsa-agency-field label span {
+display: inline;
+margin-right: 3px;
+color: #ef4444;
+font-size: inherit;
+font-weight: 700;
+}
+
+/* =========================================================
+Inputs
+========================================================= */
+
+.tsa-agency-field input,
+.tsa-agency-field select,
+.tsa-agency-field textarea {
+display: block;
+width: 100%;
+max-width: 100%;
+margin: 0;
+padding: 13px 15px;
+border: 1px solid #cbd5e1;
+border-radius: 11px;
+outline: none;
+background: #ffffff;
+color: #0f172a;
+font-family: inherit;
+font-size: 15px;
+font-weight: 400;
+line-height: 1.6;
+box-shadow: none;
+transition:
+border-color 0.2s ease,
+box-shadow 0.2s ease,
+background-color 0.2s ease;
+}
+
+.tsa-agency-field input,
+.tsa-agency-field select {
+min-height: 50px;
+}
+
+.tsa-agency-field textarea {
+min-height: 120px;
+resize: vertical;
+}
+
+.tsa-agency-field input::placeholder,
+.tsa-agency-field textarea::placeholder {
+color: #94a3b8;
+opacity: 1;
+}
+
+.tsa-agency-field input:hover,
+.tsa-agency-field select:hover,
+.tsa-agency-field textarea:hover {
+border-color: #a5b4fc;
+background: #fcfcff;
+}
+
+.tsa-agency-field input:focus,
+.tsa-agency-field select:focus,
+.tsa-agency-field textarea:focus {
+border-color: #6366f1;
+background: #ffffff;
+box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+/* =========================================================
+Validation
+========================================================= */
+
+.tsa-agency-field input.tsa-agency-error,
+.tsa-agency-field select.tsa-agency-error,
+.tsa-agency-field textarea.tsa-agency-error {
+border-color: #ef4444;
+background: #fffafa;
+}
+
+.tsa-agency-field input.tsa-agency-error:focus,
+.tsa-agency-field select.tsa-agency-error:focus,
+.tsa-agency-field textarea.tsa-agency-error:focus {
+box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* =========================================================
+Message
+========================================================= */
+
+.tsa-agency-message {
+width: 100%;
+margin: 0;
+padding: 13px 15px;
+border-radius: 11px;
+font-size: 14px;
+font-weight: 500;
+line-height: 1.75;
+white-space: normal;
+word-break: normal;
+overflow-wrap: break-word;
+}
+
+.tsa-agency-message:not([hidden]) {
+display: block;
+}
+
+.tsa-agency-message.tsa-agency-message-error {
+border: 1px solid #fecaca;
+background: #fef2f2;
+color: #991b1b;
+}
+
+.tsa-agency-message.tsa-agency-message-success {
+border: 1px solid #bbf7d0;
+background: #f0fdf4;
+color: #166534;
+}
+
+/* =========================================================
+Submit Button
+========================================================= */
+
+.tsa-agency-submit {
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+min-height: 54px;
+margin: 3px 0 0;
+padding: 14px 20px;
+border: 0;
+border-radius: 11px;
+outline: none;
+background: linear-gradient(
+135deg,
+#4f46e5 0%,
+#6366f1 100%
+);
+color: #ffffff;
+cursor: pointer;
+font-family: inherit;
+font-size: 15px;
+font-weight: 800;
+line-height: 1.5;
+text-align: center;
+box-shadow: 0 8px 20px rgba(79, 70, 229, 0.22);
+transition:
+transform 0.2s ease,
+box-shadow 0.2s ease,
+opacity 0.2s ease;
+}
+
+.tsa-agency-submit:hover {
+background: linear-gradient(
+135deg,
+#4338ca 0%,
+#4f46e5 100%
+);
+transform: translateY(-1px);
+box-shadow: 0 11px 24px rgba(79, 70, 229, 0.28);
+}
+
+.tsa-agency-submit:focus-visible {
+box-shadow:
+0 0 0 4px rgba(99, 102, 241, 0.18),
+0 8px 20px rgba(79, 70, 229, 0.22);
+}
+
+.tsa-agency-submit:active {
+transform: translateY(0);
+}
+
+.tsa-agency-submit[disabled] {
+cursor: wait;
+opacity: 0.65;
+transform: none;
+box-shadow: none;
+}
+
+.tsa-agency-submit-text,
+.tsa-agency-submit-loading {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: auto;
+color: inherit;
+font-size: inherit;
+font-weight: inherit;
+line-height: inherit;
+white-space: normal;
+}
+
+/* =========================================================
+Privacy
+========================================================= */
+
+.tsa-agency-privacy {
+display: block;
+width: 100%;
+margin: 0;
+color: #94a3b8;
+font-size: 12px;
+font-weight: 400;
+line-height: 1.8;
+text-align: center;
+white-space: normal;
+word-break: normal;
+overflow-wrap: break-word;
+}
+
+.tsa-agency-privacy a {
+color: #6366f1;
+text-decoration: underline;
+text-underline-offset: 2px;
+}
+
+/* =========================================================
+Disabled Program
+========================================================= */
+
+.tsa-agency-disabled {
+width: 100%;
+max-width: 700px;
+margin: 0 auto;
+padding: 35px;
+border: 1px solid #dbe4f0;
+border-radius: 20px;
+background: #ffffff;
+text-align: center;
+box-shadow: 0 8px 28px rgba(30, 64, 175, 0.06);
+}
+
+.tsa-agency-disabled h3 {
+display: block;
+margin: 0 0 10px;
+color: #172554;
+font-size: 22px;
+font-weight: 800;
+line-height: 1.5;
+white-space: normal;
+}
+
+.tsa-agency-disabled p {
+display: block;
+margin: 0;
+color: #64748b;
+font-size: 15px;
+font-weight: 400;
+line-height: 1.8;
+white-space: normal;
+}
+
+/* =========================================================
+RTL / LTR
+========================================================= */
+
+.tsa-agency-field input[type="url"],
+.tsa-agency-field input[type="tel"],
+.tsa-agency-field input[type="email"] {
+direction: ltr;
+text-align: left;
+}
+
+/* =========================================================
+Responsive
+========================================================= */
+
+@media (max-width: 600px) {
+
+```
+.tsa-agency-section {
+	padding: 45px 14px;
+}
+
+.tsa-agency-header {
+	margin-bottom: 32px;
+}
+
+.tsa-agency-header h2 {
+	font-size: 30px;
+	line-height: 1.35;
+}
+
+.tsa-agency-header p {
+	font-size: 15px;
+	line-height: 1.85;
+}
+
+.tsa-agency-info,
+.tsa-agency-form-wrapper {
+	padding: 23px 18px;
+	border-radius: 17px;
+}
+
+.tsa-agency-info h3,
+.tsa-agency-form-wrapper h3 {
+	font-size: 21px;
+}
+
+.tsa-agency-commission {
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 9px;
+	padding: 18px;
+}
+
+.tsa-agency-commission strong {
+	font-size: 31px;
+}
+
+.tsa-agency-steps {
+	gap: 20px;
+}
+
+.tsa-agency-steps li {
+	grid-template-columns: 38px minmax(0, 1fr);
+	gap: 11px;
+}
+
+.tsa-agency-steps li::before {
+	width: 38px;
+	height: 38px;
+	font-size: 13px;
+}
+
+.tsa-agency-step-content strong {
+	font-size: 15px;
+}
+
+.tsa-agency-step-content p {
+	font-size: 14px;
+	line-height: 1.8;
+}
+
+.tsa-agency-form {
+	gap: 17px;
+}
+
+.tsa-agency-field input,
+.tsa-agency-field select,
+.tsa-agency-field textarea {
+	font-size: 16px;
+}
+
+.tsa-agency-submit {
+	min-height: 54px;
+}
+
+.tsa-agency-disabled {
+	padding: 27px 20px;
+}
+```
+
+}
+
+/* =========================================================
+Reduced Motion
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+```
+.tsa-agency-field input,
+.tsa-agency-field select,
+.tsa-agency-field textarea,
+.tsa-agency-submit {
+	transition: none;
+}
+
+
+}

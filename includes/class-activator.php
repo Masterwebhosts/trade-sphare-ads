@@ -24,6 +24,7 @@ class TSA_Activator {
                  */
                 require_once TSA_PATH . 'includes/database/class-zones-table.php';
                 require_once TSA_PATH . 'includes/database/class-ads-table.php';
+                require_once TSA_PATH . 'includes/database/class-stats-table.php';
 
                 /*
                  * Load database manager.

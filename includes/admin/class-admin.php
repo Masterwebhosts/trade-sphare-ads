@@ -13,11 +13,24 @@ defined( 'ABSPATH' ) || exit;
 class TSA_Admin {
 
         /**
+         * Agency settings instance.
+         *
+         * @var TSA_Agency_Settings
+         */
+        private $agency_settings;
+
+        /**
          * Register admin hooks.
          *
          * @return void
          */
         public function init() {
+
+                /*
+                 * Initialize agency partner settings.
+                 */
+                $this->agency_settings = new TSA_Agency_Settings();
+                $this->agency_settings->init();
 
                 add_action(
                         'admin_menu',
@@ -73,6 +86,15 @@ class TSA_Admin {
                         'tsa-ads',
                         array( $this, 'ads_page' )
                 );
+
+                add_submenu_page(
+                        'trade-sphare-ads',
+                        __( 'Agency Partners', 'trade-sphare-ads' ),
+                        __( 'Agency Partners', 'trade-sphare-ads' ),
+                        'manage_options',
+                        'tsa-agency',
+                        array( $this, 'agency_page' )
+                );
         }
 
         /**
@@ -86,7 +108,8 @@ class TSA_Admin {
                 if (
                         false === strpos( $hook, 'trade-sphare' ) &&
                         false === strpos( $hook, 'tsa-zones' ) &&
-                        false === strpos( $hook, 'tsa-ads' )
+                        false === strpos( $hook, 'tsa-ads' ) &&
+                        false === strpos( $hook, 'tsa-agency' )
                 ) {
                         return;
                 }
@@ -108,39 +131,41 @@ class TSA_Admin {
         }
 
         /**
- * Dashboard page.
- *
- * @return void
- */
-public function dashboard_page() {
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-                wp_die(
-                        esc_html__(
-                                'You do not have permission to access this page.',
-                                'trade-sphare-ads'
-                        )
-                );
-        }
-
-        /*
-         * Dashboard statistics.
+         * Dashboard page.
+         *
+         * @return void
          */
-        $zones = TSA_Zones_Table::get_all();
+        public function dashboard_page() {
 
-        $active_zones = 0;
-
-        foreach ( $zones as $zone ) {
-                if ( 'active' === $zone->status ) {
-                        $active_zones++;
+                if ( ! current_user_can( 'manage_options' ) ) {
+                        wp_die(
+                                esc_html__(
+                                        'You do not have permission to access this page.',
+                                        'trade-sphare-ads'
+                                )
+                        );
                 }
+
+                /*
+                 * Dashboard statistics.
+                 */
+                $zones = TSA_Zones_Table::get_all();
+
+                $active_zones = 0;
+
+                foreach ( $zones as $zone ) {
+
+                        if ( 'active' === $zone->status ) {
+                                $active_zones++;
+                        }
+                }
+
+                /*
+                 * Load dashboard template.
+                 */
+                include TSA_PATH . 'templates/admin/dashboard.php';
         }
 
-        /*
-         * Load dashboard template.
-         */
-        include TSA_PATH . 'templates/admin/dashboard.php';
-}
         /**
          * Ad zones page.
          *
@@ -282,4 +307,24 @@ public function dashboard_page() {
 
                 include TSA_PATH . 'templates/admin/ads/list.php';
         }
+
+        /**
+         * Agency partners settings page.
+         *
+         * @return void
+         */
+        public function agency_page() {
+
+                if ( ! current_user_can( 'manage_options' ) ) {
+                        wp_die(
+                                esc_html__(
+                                        'You do not have permission to access this page.',
+                                        'trade-sphare-ads'
+                                )
+                        );
+                }
+
+                $this->agency_settings->render_page();
+        }
 }
+
